@@ -3592,7 +3592,7 @@ function setRoute(route, options = {}) {
 
 function safePushState(stateValue, url) {
   try {
-    history.pushState(stateValue, "", withAppBasePath(url));
+    history.pushState(stateValue, "", toHashRoute(stateValue.route, url));
   } catch {
     const query = url.includes("?") ? url.slice(url.indexOf("?")) : "";
     const fallback = stateValue.route === "home" ? "#/" : stateValue.route === "mission" ? "#/mission" : stateValue.route === "portfolio" ? "#/portfolio" : stateValue.route === "campaign-hub" ? "#/campaign-hub" : `#/creator-vibes${query}`;
@@ -3600,24 +3600,21 @@ function safePushState(stateValue, url) {
   }
 }
 
-function getAppBasePath() {
-  if (window.location.protocol === "file:") return "";
-  const segments = window.location.pathname.split("/").filter(Boolean);
-  if (window.location.hostname.endsWith("github.io") && segments[0]) return `/${segments[0]}`;
-  return "";
-}
-
-function withAppBasePath(url) {
-  const base = getAppBasePath();
-  if (!base || url.startsWith("#") || url.startsWith(base)) return url;
-  if (url === "/") return `${base}/`;
-  return `${base}${url}`;
+function toHashRoute(route, url = "") {
+  const query = url.includes("?") ? url.slice(url.indexOf("?")) : "";
+  if (route === "home") return "#/";
+  if (route === "mission") return "#/mission";
+  if (route === "portfolio") return "#/portfolio";
+  if (route === "campaign-hub") return "#/campaign-hub";
+  return `#/creator-vibes${query}`;
 }
 
 function getAppPathname() {
-  const base = getAppBasePath();
   let path = window.location.pathname;
-  if (base && (path === base || path.startsWith(`${base}/`))) path = path.slice(base.length) || "/";
+  const segments = path.split("/").filter(Boolean);
+  if (window.location.hostname.endsWith("github.io") && segments[0]) {
+    path = `/${segments.slice(1).join("/")}`;
+  }
   if (path.endsWith("/index.html")) return "/";
   return path || "/";
 }
@@ -3625,7 +3622,7 @@ function getAppPathname() {
 function syncRouteFromPath() {
   const path = getAppPathname();
   if (path === "/" || window.location.hash === "#/" || (!window.location.hash && path.endsWith("/index.html"))) {
-    setRoute(state.isAuthenticated ? "home" : "creator-vibes", { skipHistory: true });
+    setRoute("home", { skipHistory: true });
   } else if (path === "/mission" || window.location.hash === "#/mission" || path === "/creator-progress" || window.location.hash === "#/creator-progress") {
     setRoute("mission", { skipHistory: true });
   } else if (path === "/portfolio" || window.location.hash === "#/portfolio" || path === "/buddy-profile" || window.location.hash === "#/buddy-profile") {
