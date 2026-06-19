@@ -1602,6 +1602,7 @@ function renderContentLab() {
 
 function renderAll() {
   renderCategories();
+  renderMessengerQuickReplies();
   renderResultSummary();
   updateResultsVisibility();
   if (state.analysis && !state.isAnalyzing) renderTab();
@@ -2596,7 +2597,43 @@ const buddyAutoReplyTemplates = {
 ทีมงานจะช่วยแนะนำรูปแบบแคมเปญที่เหมาะสมให้ค่ะ`,
   },
   service: {
-    keywords: ["สนใจบริการ", "ติดต่อ", "ติดต่อทีมงาน", "บริการ", "campaign", "แคมเปญ", "จ้างงาน", "จ้างรีวิว"],
+    keywords: ["มีบริการอะไรบ้าง", "บริการ", "ทำอะไรได้บ้าง", "ช่วยอะไรได้บ้าง", "บริการของ buddy review", "มีแพ็กเกจอะไรบ้าง", "รับทำอะไรบ้าง"],
+    reply: `สวัสดีค่ะ 👋
+
+Buddy Review ให้บริการด้าน Influencer Marketing และ Creator Solution แบบครบวงจร โดยมีบริการหลักดังนี้
+
+✅ Influencer Marketing Campaign
+วางแผนและบริหารแคมเปญร่วมกับ Influencer ตั้งแต่ต้นจนจบ
+
+✅ Product Review Campaign
+ส่งสินค้าให้ Creator รีวิวเพื่อสร้างการรับรู้และความน่าเชื่อถือ
+
+✅ TikTok Creator Campaign
+ทำแคมเปญร่วมกับ TikTok Creator เพื่อเพิ่ม Reach และ Engagement
+
+✅ UGC (User Generated Content)
+ผลิตคอนเทนต์จาก Creator สำหรับใช้ในโฆษณาและช่องทางของแบรนด์
+
+✅ Creator Recruitment
+คัดเลือก Creator ที่เหมาะสมกับกลุ่มเป้าหมายและงบประมาณ
+
+✅ Campaign Management
+ดูแลการประสานงาน บรีฟ ตรวจงาน และติดตามผลแคมเปญ
+
+✅ Campaign Reporting
+สรุปผลและวิเคราะห์ Performance ของแคมเปญ
+
+หากสนใจบริการใดเป็นพิเศษ รบกวนแจ้งข้อมูลดังนี้ค่ะ
+
+* ชื่อบริษัท / แบรนด์
+* ประเภทสินค้า
+* เป้าหมายแคมเปญ
+* งบประมาณโดยประมาณ
+
+ทีมงานจะช่วยแนะนำรูปแบบที่เหมาะสมให้ค่ะ`,
+  },
+  contact: {
+    keywords: ["สนใจบริการ", "ติดต่อ", "ติดต่อทีมงาน", "campaign", "แคมเปญ", "จ้างงาน", "จ้างรีวิว"],
     reply: `สวัสดีค่ะ ขอบคุณที่สนใจบริการของ Buddy Review ค่ะ
 
 Buddy Review ช่วยดูแลแคมเปญ Influencer Marketing แบบครบวงจร ตั้งแต่การวางแผน คัดเลือก Creator บริหารงาน ติดตามผล และสรุปรายงาน
@@ -2719,6 +2756,47 @@ function getBuddyAutoReply(message) {
     template.keywords.some((keyword) => normalized.includes(keyword.toLowerCase()))
   );
   return matched?.reply || buddyDefaultReply;
+}
+
+const messengerQuickReplies = [
+  { label: "บริการ", message: "มีบริการอะไรบ้าง" },
+  { label: "ราคา", message: "ขอทราบราคาและแพ็กเกจ" },
+  { label: "รีวิวสินค้า", message: "สนใจส่งสินค้าให้รีวิว" },
+  { label: "หา Creator", message: "อยากหา influencer creator kol" },
+  { label: "Case Study", message: "ขอดู case study ผลงาน" },
+  { label: "ใบเสนอราคา", message: "ขอใบเสนอราคา quotation" },
+  { label: "สมัคร Creator", message: "สมัคร creator ร่วมงาน" },
+  { label: "คำถามอื่นๆ", message: "มีคำถามอื่นๆ อยากให้ทีมงานช่วยแนะนำ" },
+];
+
+function renderMessengerQuickReplies() {
+  const target = $("messengerQuickReplies");
+  if (!target) return;
+  target.innerHTML = messengerQuickReplies.map((item) =>
+    `<button type="button" data-quick-reply="${item.message}">${item.label}</button>`
+  ).join("");
+}
+
+function sendToConnectedMessenger(message) {
+  const payload = {
+    channel: "facebook_messenger",
+    page: "Buddy Review",
+    message,
+    createdAt: new Date().toISOString(),
+  };
+  console.info("Messenger sync placeholder", payload);
+  return payload;
+}
+
+function handleMessengerMessage(message) {
+  const cleanMessage = message.trim();
+  if (!cleanMessage) return;
+  appendMessengerBubble(cleanMessage, "creator");
+  sendToConnectedMessenger(cleanMessage);
+  const reply = getBuddyAutoReply(cleanMessage);
+  window.setTimeout(() => {
+    appendMessengerBubble(reply, "buddy");
+  }, 450);
 }
 
 function appendMessengerBubble(text, type = "creator") {
@@ -3676,16 +3754,17 @@ $("messengerLoginButton")?.addEventListener("click", (event) => {
   event.currentTarget.disabled = true;
   appendMessengerBubble("เชื่อม Facebook แล้วค่ะ ส่งข้อความในหน้าต่างนี้ได้เลย", "buddy");
 });
+$("messengerQuickReplies")?.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-quick-reply]");
+  if (!button) return;
+  handleMessengerMessage(button.dataset.quickReply);
+});
 $("messengerCompose")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const input = $("messengerInput");
   if (!input?.value.trim()) return;
-  appendMessengerBubble(input.value, "creator");
-  const reply = getBuddyAutoReply(input.value);
+  handleMessengerMessage(input.value);
   input.value = "";
-  window.setTimeout(() => {
-    appendMessengerBubble(reply, "buddy");
-  }, 450);
 });
 
 $("profileMenuBackdrop")?.addEventListener("click", () => {

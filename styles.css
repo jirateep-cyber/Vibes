@@ -5869,6 +5869,36 @@ body.light-mode .autosave-indicator.active {
   padding: 0.2rem 0.15rem;
 }
 
+.messenger-quick-replies {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding: 0.1rem 0.05rem 0.15rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.messenger-quick-replies::-webkit-scrollbar {
+  display: none;
+}
+
+.messenger-quick-replies button {
+  flex: 0 0 auto;
+  min-height: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 0 0.72rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.messenger-quick-replies button:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.52), rgba(236, 72, 153, 0.42));
+}
+
 .chat-bubble {
   width: fit-content;
   max-width: 82%;
@@ -5950,8 +5980,14 @@ body.light-mode .messenger-panel-head button {
 }
 
 body.light-mode .messenger-login-row,
-body.light-mode .messenger-compose {
+body.light-mode .messenger-compose,
+body.light-mode .messenger-quick-replies button {
   background: #f7f0ff;
+}
+
+body.light-mode .messenger-quick-replies button {
+  color: #4c1d95;
+  border-color: rgba(124, 58, 237, 0.18);
 }
 
 body.light-mode .chat-bubble.buddy {
