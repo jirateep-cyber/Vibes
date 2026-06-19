@@ -5876,6 +5876,7 @@ body.light-mode .autosave-indicator.active {
   padding: 0.65rem 0.78rem;
   font-size: 0.86rem;
   line-height: 1.45;
+  white-space: pre-line;
 }
 
 .chat-bubble.buddy {

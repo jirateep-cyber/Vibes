@@ -2577,6 +2577,150 @@ function toggleMessengerPanel(forceOpen) {
   button.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
 }
 
+const buddyAutoReplyTemplates = {
+  price: {
+    keywords: ["ราคา", "ค่าบริการ", "แพ็กเกจ", "package", "งบประมาณ", "budget", "เรท", "ค่าใช้จ่าย"],
+    reply: `สวัสดีค่ะ ขอบคุณที่สนใจบริการของ Buddy Review ค่ะ
+
+โดยทั่วไปเราแนะนำงบประมาณเริ่มต้นที่ 100,000 บาทขึ้นไป เพื่อให้แคมเปญสามารถสร้างผลลัพธ์และประสิทธิภาพได้อย่างเหมาะสม ทั้งในด้านจำนวน Creator, Reach และคุณภาพของ Content
+
+รบกวนขอข้อมูลเพิ่มเติมดังนี้ค่ะ
+
+* ชื่อบริษัท / แบรนด์
+* ประเภทสินค้า / บริการ
+* เป้าหมายแคมเปญ
+* ช่องทางที่ต้องการทำ (TikTok, Facebook, Instagram, YouTube)
+* งบประมาณโดยประมาณ
+* ระยะเวลาที่ต้องการเริ่มแคมเปญ
+
+ทีมงานจะช่วยแนะนำรูปแบบแคมเปญที่เหมาะสมให้ค่ะ`,
+  },
+  service: {
+    keywords: ["สนใจบริการ", "ติดต่อ", "ติดต่อทีมงาน", "บริการ", "campaign", "แคมเปญ", "จ้างงาน", "จ้างรีวิว"],
+    reply: `สวัสดีค่ะ ขอบคุณที่สนใจบริการของ Buddy Review ค่ะ
+
+Buddy Review ช่วยดูแลแคมเปญ Influencer Marketing แบบครบวงจร ตั้งแต่การวางแผน คัดเลือก Creator บริหารงาน ติดตามผล และสรุปรายงาน
+
+รบกวนแจ้งข้อมูลเพิ่มเติมดังนี้ค่ะ
+
+* ชื่อบริษัท / แบรนด์
+* ประเภทสินค้า
+* เป้าหมายทางการตลาด
+* งบประมาณโดยประมาณ
+* ช่องทางติดต่อกลับ
+
+ทีมงานจะติดต่อกลับโดยเร็วที่สุดค่ะ`,
+  },
+  review: {
+    keywords: ["รีวิวสินค้า", "ส่งสินค้า", "รีวิว", "ทดลองใช้", "สินค้าให้รีวิว", "product review", "ส่งของ"],
+    reply: `สวัสดีค่ะ ขอบคุณที่สนใจใช้บริการรีวิวสินค้ากับ Buddy Review ค่ะ
+
+รบกวนส่งข้อมูลดังนี้เพื่อให้ทีมงานประเมินแคมเปญเบื้องต้นค่ะ
+
+* ชื่อบริษัท / แบรนด์
+* ชื่อสินค้า
+* รายละเอียดสินค้า
+* กลุ่มเป้าหมาย
+* Budget ที่ตั้งไว้
+* Campaign Brief
+* ช่องทางที่ต้องการทำ (TikTok / Facebook / Instagram / YouTube)
+* ชื่อผู้ติดต่อ
+* เบอร์โทรศัพท์
+* อีเมล
+
+เมื่อได้รับข้อมูลครบถ้วนแล้ว ทีมงานจะช่วยประเมิน Creator และรูปแบบแคมเปญที่เหมาะสมให้ค่ะ`,
+  },
+  creator: {
+    keywords: ["influencer", "creator", "kol", "หาอินฟลู", "หา creator", "หา influencer", "ครีเอเตอร์", "อินฟลู"],
+    reply: `สวัสดีค่ะ
+
+Buddy Review มี Creator ครอบคลุมหลากหลายหมวดหมู่ เช่น Beauty, Lifestyle, Food, Health, Fashion, Family, Tech และอื่น ๆ
+
+รบกวนแจ้งข้อมูลดังนี้ค่ะ
+
+* ประเภทสินค้า / บริการ
+* กลุ่มเป้าหมาย
+* งบประมาณ
+* จำนวน Creator ที่ต้องการ
+* Platform ที่ต้องการทำ
+
+ทีมงานจะช่วยแนะนำ Creator ที่เหมาะสมกับแคมเปญให้ค่ะ`,
+  },
+  caseStudy: {
+    keywords: ["case study", "เคส", "ผลงาน", "ตัวอย่างงาน", "portfolio", "พอร์ต", "ตัวอย่าง"],
+    reply: `สวัสดีค่ะ
+
+สามารถดู Case Study และตัวอย่างผลงานของ Buddy Review ได้ที่
+
+https://solutions.buddyreview.co/
+
+หากต้องการตัวอย่างในอุตสาหกรรมเฉพาะ เช่น Beauty, FMCG, Retail, Real Estate, Education หรือ Healthcare สามารถแจ้งเพิ่มเติมได้ค่ะ`,
+  },
+  register: {
+    keywords: ["สมัคร creator", "สมัคร influencer", "ร่วมงาน", "สมัครงานรีวิว", "สมัครเป็น creator", "สมัครเป็น influencer", "ลงทะเบียน creator"],
+    reply: `สวัสดีค่ะ
+
+หากสนใจสมัครเป็น Creator กับ Buddy Review สามารถสมัครได้ผ่านเว็บไซต์
+
+https://buddyreview.co/
+
+ทีมงานจะทำการตรวจสอบข้อมูลและติดต่อกลับเมื่อมีแคมเปญที่เหมาะสมค่ะ`,
+  },
+  smallBudget: {
+    keywords: ["งบน้อย", "งบจำกัด", "งบไม่เยอะ", "งบน้อยได้ไหม", "budget น้อย", "ราคาถูก"],
+    reply: `สวัสดีค่ะ
+
+เพื่อให้แคมเปญมีประสิทธิภาพและเห็นผลลัพธ์ได้จริง ทาง Buddy Review แนะนำงบประมาณเริ่มต้นที่ประมาณ 100,000 บาทขึ้นไป
+
+อย่างไรก็ตาม หากมีงบประมาณจำกัด สามารถแจ้งงบประมาณและเป้าหมายของแคมเปญเข้ามาได้ค่ะ ทีมงานจะช่วยแนะนำแนวทางที่เหมาะสมที่สุดให้`,
+  },
+  quotation: {
+    keywords: ["ใบเสนอราคา", "quotation", "เสนอราคา", "ขอราคา", "quote", "ใบ quote"],
+    reply: `สวัสดีค่ะ
+
+รบกวนส่งข้อมูลดังนี้เพื่อจัดทำใบเสนอราคาเบื้องต้นค่ะ
+
+* ชื่อบริษัท
+* เลขผู้เสียภาษี (ถ้ามี)
+* ชื่อผู้ติดต่อ
+* เบอร์โทรศัพท์
+* อีเมล
+* รายละเอียดสินค้า / บริการ
+* Budget ที่ตั้งไว้
+* Campaign Brief
+* Timeline แคมเปญ
+
+ทีมงานจะจัดทำใบเสนอราคาและติดต่อกลับค่ะ`,
+  },
+  timeline: {
+    keywords: ["ระยะเวลา", "timeline", "ใช้เวลากี่วัน", "กี่วัน", "เริ่มแคมเปญ", "งานด่วน", "เร่งด่วน"],
+    reply: `สวัสดีค่ะ
+
+โดยทั่วไปแนะนำให้เตรียมแผนล่วงหน้าอย่างน้อย 2-4 สัปดาห์ เพื่อให้มีเวลาสำหรับการคัดเลือก Creator, ส่ง Brief, ผลิต Content, ตรวจงาน และเผยแพร่คอนเทนต์
+
+หากเป็นงานเร่งด่วน สามารถแจ้ง Timeline ที่ต้องการได้เลยค่ะ ทีมงานจะประเมินความเป็นไปได้ให้ค่ะ`,
+  },
+};
+
+const buddyDefaultReply = `สวัสดีค่ะ ขอบคุณที่ติดต่อ Buddy Review ค่ะ
+
+รบกวนแจ้งรายละเอียดเพิ่มเติมได้เลยค่ะ เช่น
+
+* ชื่อบริษัท / แบรนด์
+* สินค้าหรือบริการ
+* เป้าหมายแคมเปญ
+* งบประมาณโดยประมาณ
+
+ทีมงานจะช่วยแนะนำแนวทางที่เหมาะสมให้ค่ะ`;
+
+function getBuddyAutoReply(message) {
+  const normalized = message.toLowerCase();
+  const matched = Object.values(buddyAutoReplyTemplates).find((template) =>
+    template.keywords.some((keyword) => normalized.includes(keyword.toLowerCase()))
+  );
+  return matched?.reply || buddyDefaultReply;
+}
+
 function appendMessengerBubble(text, type = "creator") {
   const log = $("messengerChatLog");
   if (!log || !text.trim()) return;
@@ -3537,9 +3681,10 @@ $("messengerCompose")?.addEventListener("submit", (event) => {
   const input = $("messengerInput");
   if (!input?.value.trim()) return;
   appendMessengerBubble(input.value, "creator");
+  const reply = getBuddyAutoReply(input.value);
   input.value = "";
   window.setTimeout(() => {
-    appendMessengerBubble("รับข้อความแล้วค่ะ ทีม Buddy Review จะตอบกลับในแชทนี้", "buddy");
+    appendMessengerBubble(reply, "buddy");
   }, 450);
 });
 
