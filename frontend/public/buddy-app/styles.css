@@ -4037,6 +4037,59 @@ body.light-mode .auth-close {
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
 
+.dropdown-mission-energy {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255, 216, 77, 0.18), transparent 6rem),
+    rgba(255, 255, 255, 0.075);
+}
+
+.dropdown-mission-energy h3,
+.dropdown-mission-energy p {
+  margin: 0;
+}
+
+.dropdown-mission-energy h3 {
+  margin-bottom: 0.18rem;
+  color: #ffffff;
+  font-size: 1.02rem;
+}
+
+.mission-energy-ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 4.2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(24, 18, 35, 0.94) 0 58%, transparent 59%),
+    conic-gradient(#ffd84d 0 var(--mission-progress), rgba(255, 255, 255, 0.12) var(--mission-progress) 100%);
+  box-shadow: 0 12px 28px rgba(255, 216, 77, 0.14);
+}
+
+.mission-energy-ring strong,
+.mission-energy-ring span {
+  grid-area: 1 / 1;
+}
+
+.mission-energy-ring strong {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 900;
+  transform: translateY(-0.28rem);
+}
+
+.mission-energy-ring span {
+  color: #ffd84d;
+  font-size: 0.66rem;
+  font-weight: 900;
+  transform: translateY(0.62rem);
+}
+
 .dropdown-action-section:hover {
   transform: translateY(-1px);
   border-color: rgba(236, 72, 153, 0.35);
@@ -5140,6 +5193,31 @@ body.light-mode .mission-row {
   color: #18181b;
   border-color: #e9d5ff;
   background: #faf5ff;
+}
+
+body.light-mode .dropdown-mission-energy {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255, 216, 77, 0.24), transparent 6rem),
+    #ffffff;
+}
+
+body.light-mode .dropdown-mission-energy h3 {
+  color: #241238;
+}
+
+body.light-mode .mission-energy-ring {
+  background:
+    radial-gradient(circle, #ffffff 0 58%, transparent 59%),
+    conic-gradient(#f59e0b 0 var(--mission-progress), #eee7ff var(--mission-progress) 100%);
+  box-shadow: 0 12px 28px rgba(245, 158, 11, 0.14);
+}
+
+body.light-mode .mission-energy-ring strong {
+  color: #241238;
+}
+
+body.light-mode .mission-energy-ring span {
+  color: #9a5a00;
 }
 
 body.light-mode .progress-detail-panel {

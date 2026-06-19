@@ -2494,6 +2494,8 @@ function renderInfluencerMenu() {
   const needed = nextTier ? nextTier.min - userProgression.creatorXP : 0;
   const creatorVibe = summary.analysis ? `${summary.analysis.icon} ${summary.analysis.creator_dna}` : "";
   const connectedSummary = summary.connectedCount < summary.connectedTotal ? `<p><b>Connected:</b> ${summary.connectedCount}/${summary.connectedTotal} channels</p>` : "";
+  const missionPercent = Math.round((summary.missionDone / Math.max(summary.missionTotal, 1)) * 100);
+  const missionEnergy = missionPercent >= 80 ? "Power Mode" : missionPercent >= 40 ? "กำลังมาแรง" : "เริ่มสะสมพลัง";
   $("navProfileAvatar").textContent = summary.avatarText;
   if ($("navProfileTier")) $("navProfileTier").textContent = `${tier.icon} ${tier.name}`;
   if (document.querySelector(".profile-menu-name")) document.querySelector(".profile-menu-name").textContent = summary.name;
@@ -2537,9 +2539,16 @@ function renderInfluencerMenu() {
         </div>
       </div>
     </div>
-    <div class="dropdown-section">
-      <p class="eyeline">Mission วันนี้</p>
-      <p>${summary.missionDone}/${summary.missionTotal} สำเร็จแล้ว</p>
+    <div class="dropdown-section dropdown-mission-energy">
+      <div class="mission-energy-ring" style="--mission-progress:${missionPercent}%">
+        <strong>${summary.missionDone}/${summary.missionTotal}</strong>
+        <span>${missionPercent}%</span>
+      </div>
+      <div>
+        <p class="eyeline">Mission วันนี้</p>
+        <h3>${missionEnergy}</h3>
+        <p>${summary.missionDone}/${summary.missionTotal} สำเร็จแล้ว · ทำต่อเพื่อเก็บ XP และ Reward</p>
+      </div>
     </div>
     <button class="ghost-button compact dropdown-logout" type="button">ออกจากระบบ</button>`;
   setTheme(localStorage.getItem("buddyReviewTheme") === "light" ? "light" : "dark");
