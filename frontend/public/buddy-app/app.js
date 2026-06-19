@@ -20,6 +20,30 @@ const categories = [
   "อาหารและเครื่องดื่ม",
 ];
 
+const categoryLabels = {
+  en: {
+    Technology: "Technology",
+    "การเงินและธุรกิจ": "Finance & Business",
+    "การศึกษาและความรู้": "Education & Knowledge",
+    "กีฬาและออกกำลังกาย": "Sports & Fitness",
+    "ข่าวและการเมือง": "News & Politics",
+    "ครอบครัว": "Family",
+    "ความงามและสุขภาพ": "Beauty & Wellness",
+    Lifestyle: "Lifestyle",
+    "ท่องเที่ยว": "Travel",
+    "ธรรมชาติและสิ่งแวดล้อม": "Nature & Environment",
+    "บันเทิง": "Entertainment",
+    "บ้านและสวน": "Home & Garden",
+    "โปรโมชั่น": "Deals & Promotions",
+    "แฟชั่น": "Fashion",
+    "ยานพาหนะ": "Automotive",
+    "ศิลปะและวัฒนธรรม": "Arts & Culture",
+    "สัตว์เลี้ยง": "Pets",
+    "สินค้าและผลิตภัณฑ์": "Products & Goods",
+    "อาหารและเครื่องดื่ม": "Food & Beverage",
+  },
+};
+
 const dnaTypes = [
   {
     name: "The Explorer",
@@ -606,7 +630,18 @@ const i18nText = {
     "เลือกหมวดคอนเทนต์ แล้วดู Vibe, Audience และ Content Strategy แบบ social-first": "Choose content categories and see your creator vibe, audience, and social-first content strategy.",
     "Content Categories เลือกได้ 1-3 หมวดหมู่": "Content categories, choose 1-3",
     "ต้องเลือกอย่างน้อย 1 หมวดหมู่เพื่อวิเคราะห์": "Choose at least one category to analyze.",
+    "เลือกได้สูงสุด 3 หมวดหมู่": "Choose up to 3 categories.",
+    "กรุณาเลือกอย่างน้อย 1 หมวดหมู่": "Please choose at least one category.",
+    "พร้อมวิเคราะห์ Creator Vibes จากแพลตฟอร์มและหมวดหมู่ที่เลือก": "Ready to analyze Creator Vibes from your selected platform and categories.",
     "วิเคราะห์ Creator Vibes": "Analyze Creator Vibes",
+    "กำลังวิเคราะห์...": "Analyzing...",
+    "กำลังวิเคราะห์ Creator Vibes ของคุณ...": "Analyzing your Creator Vibes...",
+    "✨ วิเคราะห์เสร็จแล้ว": "✨ Analysis complete",
+    "พร้อมแล้วสำหรับ Creator Vibes ของคุณ": "Your Creator Vibes are ready.",
+    "วิเคราะห์หมวดหมู่": "Analyzing categories",
+    "ค้นหา Creator Vibe": "Finding Creator Vibe",
+    "วิเคราะห์ผู้ติดตาม": "Analyzing audience",
+    "เตรียมผลลัพธ์": "Preparing results",
     "ภาพรวม": "Overview",
     "ผู้ติดตาม": "Audience",
     "เปรียบเทียบ": "Comparison",
@@ -649,6 +684,8 @@ const i18nText = {
     "สมัครสมาชิก Buddy Review": "Create a Buddy Review account",
     "สร้างบัญชีเพื่อเก็บ Creator Vibes, Portfolio, Mission, Campaign และ Reward ไว้ในโปรไฟล์เดียว": "Create an account to save Creator Vibes, Portfolio, Mission, Campaign, and Rewards in one profile.",
     "เข้าสู่ระบบ Buddy Review": "Log in to Buddy Review",
+    "ล็อกอินเพื่อวิเคราะห์ Creator Vibes ได้แม่นขึ้น": "Log in for a more accurate Creator Vibes analysis",
+    "ถ้าเชื่อม Facebook หรือ TikTok ระบบจะดึง engagement, posting history และ audience signal มาช่วยเทียบ category ได้ครบกว่า แต่ข้ามได้": "Connect Facebook or TikTok to use engagement, posting history, and audience signals for a richer category match. You can skip this.",
     "มีบัญชีแล้ว? Login": "Already have an account? Login",
     "ยังไม่มีบัญชี? Register": "No account yet? Register",
     "Login เพื่อเข้า Home": "Log in to access Home",
@@ -673,6 +710,21 @@ const i18nText = {
     "เพิ่ม Portfolio": "Add Portfolio",
     "เพิ่ม Rate Card": "Add Rate Card",
     "พร้อม Export เป็น media kit สำหรับส่งให้แบรนด์": "Ready to export as a brand media kit",
+    "ติดตาม XP, Badge, Skill และ Mission เพื่อยกระดับ Portfolio ให้พร้อมรับงานจากแบรนด์": "Track XP, badges, skills, and missions to level up your portfolio for brand work.",
+    "Top 25 รับ Bonus Reward + Campaign Boost": "Top 25 unlock Bonus Rewards + Campaign Boost",
+    "Rank วิเคราะห์จากผลงาน, การโพสต์, engagement, การรับงาน, login activity และ mission completion": "Rank is calculated from portfolio work, posting, engagement, campaign work, login activity, and mission completion.",
+    "ครีเอเตอร์หลายจักรวาล": "Multi-verse Creator",
+    "สายออกไปใช้ชีวิต": "Experience Explorer",
+    "ตัวจริงสายความรู้": "Knowledge Expert",
+    "ตัวแม่ตัวพ่อแห่งเทรนด์": "Trend Leader",
+    "สายปั้น สายโต": "Growth Builder",
+    "ตัวท็อปสายเอนเตอร์เทน": "Entertainment Driver",
+    "หัวใจของคอมมูนิตี้": "Community Heart",
+    "สายลึกตัวจริง": "Deep Specialist",
+    "เพิ่ม Bio เพื่อให้แบรนด์เข้าใจตัวตนและสไตล์คอนเทนต์ของคุณ": "Add a bio so brands understand your identity and content style.",
+    "เพิ่มชื่อโปรไฟล์": "Add profile name",
+    "เพิ่มช่องทางติดต่อ": "Add contact channel",
+    "ถ้าล็อกอิน Facebook/TikTok ระบบจะใช้ข้อมูลจริงจากโพสต์, reach, comments, saves, shares และ campaign history แทนค่าประเมิน": "Log in with Facebook/TikTok to replace estimates with real post, reach, comment, save, share, and campaign history data.",
   },
 };
 
@@ -682,6 +734,14 @@ let isApplyingLanguage = false;
 function translateString(value) {
   if (state.language === "th") return value;
   return i18nText[state.language]?.[value.trim()] || value;
+}
+
+function getCategoryLabel(category) {
+  return categoryLabels[state.language]?.[category] || category;
+}
+
+function getCategoryCountText() {
+  return state.language === "en" ? `Selected ${state.selected.length}/3 categories` : `เลือกแล้ว ${state.selected.length}/3 หมวดหมู่`;
 }
 
 function applyLanguage(root = document.body) {
@@ -724,6 +784,12 @@ function setLanguage(language) {
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", active ? "true" : "false");
   });
+  renderCategories();
+  setAnalyzeButtonState(state.isAnalyzing);
+  if (state.analysis) {
+    renderResultSummary();
+    if (!state.isAnalyzing) renderTab();
+  }
   applyLanguage(document.body);
 }
 
@@ -1106,10 +1172,10 @@ function ctaFormula(index) {
 
 function renderCategories() {
   $("categoryGrid").innerHTML = categories
-    .map((category) => `<button class="category-chip ${state.selected.includes(category) ? "selected" : ""}" type="button" data-category="${category}">${category}</button>`)
+    .map((category) => `<button class="category-chip ${state.selected.includes(category) ? "selected" : ""}" type="button" data-category="${category}">${getCategoryLabel(category)}</button>`)
     .join("");
-  $("categoryCount").textContent = `เลือกแล้ว ${state.selected.length}/3 หมวดหมู่`;
-  $("categoryHint").textContent = state.selected.length ? "พร้อมวิเคราะห์ Creator Vibes จากแพลตฟอร์มและหมวดหมู่ที่เลือก" : "ต้องเลือกอย่างน้อย 1 หมวดหมู่เพื่อวิเคราะห์";
+  $("categoryCount").textContent = getCategoryCountText();
+  $("categoryHint").textContent = state.selected.length ? translateString("พร้อมวิเคราะห์ Creator Vibes จากแพลตฟอร์มและหมวดหมู่ที่เลือก") : translateString("ต้องเลือกอย่างน้อย 1 หมวดหมู่เพื่อวิเคราะห์");
 }
 
 function renderHeader(analysis) {
@@ -1120,7 +1186,7 @@ function renderHeader(analysis) {
       <div class="avatar persona-avatar">${analysis.icon}</div>
       <div>
         <h2>${analysis.icon} ${analysis.creator_dna}</h2>
-        <p>${analysis.thai_title}</p>
+        <p>${translateString(analysis.thai_title)}</p>
         <span class="code-pill">${analysis.code} · ${analysis.confidence}% confidence · ${form.platform}</span>
       </div>
     </div>`;
@@ -1149,25 +1215,25 @@ function renderResultSummary() {
     <div>
       <p class="eyeline">Your Creator Vibe</p>
       <h2>${a.creator_dna}</h2>
-      <p>${a.thai_title}</p>
+      <p>${translateString(a.thai_title)}</p>
       <div class="summary-chips">
         <span>${a.confidence}% Confidence</span>
         <span>${getFormData().platform}</span>
-        ${a.selected_categories.map((category) => `<span>${category}</span>`).join("")}
+        ${a.selected_categories.map((category) => `<span>${getCategoryLabel(category)}</span>`).join("")}
       </div>
     </div>`;
 }
 
 function renderLoadingHero() {
   const progress = Math.min(100, Math.max(0, Math.round(state.loadingProgress)));
-  const message = state.loadingComplete ? "พร้อมแล้วสำหรับ Creator Vibes ของคุณ" : loadingMessages[Math.min(state.loadingStep, loadingMessages.length - 1)];
+  const message = state.loadingComplete ? translateString("พร้อมแล้วสำหรับ Creator Vibes ของคุณ") : loadingMessages[Math.min(state.loadingStep, loadingMessages.length - 1)];
   return `
     <div class="analysis-loading ${state.loadingComplete ? "complete" : ""}">
       <div class="loading-glow"></div>
       <div class="loading-logo">B</div>
       <div class="loading-copy">
         <p class="eyeline">BUDDY REVIEW</p>
-        <h2>${state.loadingComplete ? "✨ วิเคราะห์เสร็จแล้ว" : "กำลังวิเคราะห์ Creator Vibes ของคุณ..."}</h2>
+        <h2>${state.loadingComplete ? translateString("✨ วิเคราะห์เสร็จแล้ว") : translateString("กำลังวิเคราะห์ Creator Vibes ของคุณ...")}</h2>
         <p>${message}</p>
       </div>
       <div class="loading-progress-wrap">
@@ -1180,8 +1246,8 @@ function renderLoadingHero() {
       <div class="loading-steps">
         ${loadingSteps.map((step, index) => `
           <div class="loading-step ${index < state.loadingStep ? "done" : ""} ${index === state.loadingStep ? "active" : ""}" style="--delay:${index * 80}ms">
-            <span>${index < state.loadingStep ? "✓" : "○"}</span>
-            <p>${step}</p>
+          <span>${index < state.loadingStep ? "✓" : "○"}</span>
+          <p>${translateString(step)}</p>
           </div>`).join("")}
       </div>
     </div>`;
@@ -1245,7 +1311,7 @@ function renderTab() {
   if (tab === "overview") {
     const o = a.overview_tab;
     html += `<div class="content-stack">
-      <div class="info-block"><h3>หมวดหมู่ที่เลือก</h3><div class="tag-list">${a.selected_categories.map((c) => `<span class="tag">${c}</span>`).join("")}</div></div>
+      <div class="info-block"><h3>หมวดหมู่ที่เลือก</h3><div class="tag-list">${a.selected_categories.map((c) => `<span class="tag">${getCategoryLabel(c)}</span>`).join("")}</div></div>
       <div class="info-block"><h3>All Vibe Scores</h3>${renderVibeScores(a.vibe_scores)}</div>
       ${!state.isAuthenticated ? renderLockedOverviewPreview() : `
       ${["personality:บุคลิก", "creator_type:สายไหน", "not_your_style:ไม่ใช่สายไหน", "vibe:Vibe", "communication_style:วิธีพูด", "tone_of_voice:น้ำเสียง", "channel_identity:ตัวตนของช่อง"].map((pair) => {
@@ -1453,7 +1519,7 @@ function renderCategoryEngagementComparison(analysis) {
     ${categoryRows.map((item, index) => `
       <article>
         <div>
-          <strong>#${index + 1} ${item.category}</strong>
+          <strong>#${index + 1} ${getCategoryLabel(item.category)}</strong>
           <span>${item.rankLabel}</span>
         </div>
         <div class="category-er-bar">
@@ -1461,9 +1527,9 @@ function renderCategoryEngagementComparison(analysis) {
           <b>Avg ER ${item.benchmark}%</b>
           <strong>Your ER ${item.yourEr}%</strong>
         </div>
-        <p>คำนวณจาก ER เฉลี่ย 5 โพสต์ล่าสุด: ${item.latestPostErs.map((value) => `${value}%`).join(", ")} · คุณอยู่ในระดับ ${item.percentile}% ของหมวดนี้</p>
+        <p>${state.language === "en" ? `Calculated from the average ER of your latest 5 posts: ${item.latestPostErs.map((value) => `${value}%`).join(", ")} · You are in the ${item.percentile}% tier for this category` : `คำนวณจาก ER เฉลี่ย 5 โพสต์ล่าสุด: ${item.latestPostErs.map((value) => `${value}%`).join(", ")} · คุณอยู่ในระดับ ${item.percentile}% ของหมวดนี้`}</p>
       </article>`).join("")}
-    <p class="helper">ถ้าล็อกอิน Facebook/TikTok ระบบจะใช้ข้อมูลจริงจากโพสต์, reach, comments, saves, shares และ campaign history แทนค่าประเมิน</p>
+    <p class="helper">${translateString("ถ้าล็อกอิน Facebook/TikTok ระบบจะใช้ข้อมูลจริงจากโพสต์, reach, comments, saves, shares และ campaign history แทนค่าประเมิน")}</p>
   </div>`;
 }
 
@@ -1516,7 +1582,7 @@ function renderStoryCard() {
         <div class="dna-icon">${a.icon}</div>
         <p class="story-kicker">THE</p>
         <h3>${a.share_card.dna_name.replace("The ", "").toUpperCase()}</h3>
-        <strong>${a.share_card.thai_title}</strong>
+        <strong>${translateString(a.share_card.thai_title)}</strong>
       </div>
       <div class="story-divider"></div>
       <div class="story-quote glass-panel">"${a.share_card.identity_line}"</div>
@@ -1530,7 +1596,7 @@ function renderStoryCard() {
       </div>
       <div class="story-categories glass-panel">
         <strong>🏷 Categories</strong>
-        <div class="story-chip-row">${a.selected_categories.map((category) => `<span>${category}</span>`).join("")}</div>
+        <div class="story-chip-row">${a.selected_categories.map((category) => `<span>${getCategoryLabel(category)}</span>`).join("")}</div>
       </div>
       <div class="story-hash">#BuddyReview<br>#CreatorVibes</div>
     </div>`;
@@ -1678,7 +1744,7 @@ function setAnalyzeButtonState(isLoading) {
   const button = document.querySelector("#creatorForm .primary-button");
   if (!button) return;
   button.disabled = isLoading;
-  button.textContent = isLoading ? "กำลังวิเคราะห์..." : "วิเคราะห์ Creator Vibes";
+  button.textContent = isLoading ? translateString("กำลังวิเคราะห์...") : translateString("วิเคราะห์ Creator Vibes");
 }
 
 function storeLatestAnalysis() {
@@ -1863,14 +1929,14 @@ function openAuthModal(context = "login") {
   state.authMode = context === "signup" || context === "register" ? "register" : "login";
   if (context === "category") {
     state.authMode = "login";
-    title.textContent = "ล็อกอินเพื่อวิเคราะห์ Creator Vibes ได้แม่นขึ้น";
-    copy.textContent = "ถ้าเชื่อม Facebook หรือ TikTok ระบบจะดึง engagement, posting history และ audience signal มาช่วยเทียบ category ได้ครบกว่า แต่ข้ามได้";
+    title.textContent = translateString("ล็อกอินเพื่อวิเคราะห์ Creator Vibes ได้แม่นขึ้น");
+    copy.textContent = translateString("ถ้าเชื่อม Facebook หรือ TikTok ระบบจะดึง engagement, posting history และ audience signal มาช่วยเทียบ category ได้ครบกว่า แต่ข้ามได้");
   } else if (state.authMode === "register") {
-    title.textContent = "สมัครสมาชิก Buddy Review";
-    copy.textContent = "สร้างบัญชีเพื่อเก็บ Creator Vibes, Portfolio, Mission, Campaign และ Reward ไว้ในโปรไฟล์เดียว";
+    title.textContent = translateString("สมัครสมาชิก Buddy Review");
+    copy.textContent = translateString("สร้างบัญชีเพื่อเก็บ Creator Vibes, Portfolio, Mission, Campaign และ Reward ไว้ในโปรไฟล์เดียว");
   } else {
-    title.textContent = "เข้าสู่ระบบ Buddy Review";
-    copy.textContent = "ล็อกอินเพื่อดึงข้อมูล engagement, posting history, campaign fit และแนะนำงานที่เหมาะกับคุณได้แม่นขึ้น";
+    title.textContent = translateString("เข้าสู่ระบบ Buddy Review");
+    copy.textContent = translateString("ล็อกอินเพื่อดึงข้อมูล engagement, posting history, campaign fit และแนะนำงานที่เหมาะกับคุณได้แม่นขึ้น");
   }
   renderAuthEmailForm();
   modal.classList.remove("hidden");
@@ -2008,7 +2074,7 @@ function renderProfileProgressCard() {
         <div class="progress-hero-copy">
           <p class="eyeline">Creator Progress</p>
           <h2>Profile Progress</h2>
-          <p class="progress-lead">ติดตาม XP, Badge, Skill และ Mission เพื่อยกระดับ Portfolio ให้พร้อมรับงานจากแบรนด์</p>
+          <p class="progress-lead">${translateString("ติดตาม XP, Badge, Skill และ Mission เพื่อยกระดับ Portfolio ให้พร้อมรับงานจากแบรนด์")}</p>
           <div class="xp-meter">
             <div class="progress-meta">
               <strong>${userProgression.creatorXP.toLocaleString()} / ${nextTier ? nextTier.min.toLocaleString() : userProgression.creatorXP.toLocaleString()} XP</strong>
@@ -2167,7 +2233,7 @@ function getLeaderboardData(summary, creatorSkills, creatorBadges) {
       title: "June Creator Sprint",
       subtitle: "Seasonal Competition",
       progress: Math.min(100, Math.round((completedMissions / userProgression.missions.length) * 100)),
-      prize: "Top 25 รับ Bonus Reward + Campaign Boost",
+      prize: translateString("Top 25 รับ Bonus Reward + Campaign Boost"),
     },
   };
 }
@@ -2186,7 +2252,7 @@ function renderLeaderboardDashboard(summary, creatorSkills, creatorBadges) {
         <div>
           <p class="eyeline">Leaderboard</p>
           <h2>Creator Ranking Console</h2>
-          <p>Rank วิเคราะห์จากผลงาน, การโพสต์, engagement, การรับงาน, login activity และ mission completion</p>
+          <p>${translateString("Rank วิเคราะห์จากผลงาน, การโพสต์, engagement, การรับงาน, login activity และ mission completion")}</p>
         </div>
       </div>
       <div class="leaderboard-current-grid">
@@ -3230,14 +3296,14 @@ $("categoryGrid").addEventListener("click", (event) => {
   const category = button.dataset.category;
   if (state.selected.includes(category)) {
     if (state.selected.length === 1) {
-      $("categoryHint").textContent = "ต้องเลือกอย่างน้อย 1 หมวดหมู่เพื่อวิเคราะห์";
+      $("categoryHint").textContent = translateString("ต้องเลือกอย่างน้อย 1 หมวดหมู่เพื่อวิเคราะห์");
       return;
     }
     state.selected = state.selected.filter((item) => item !== category);
   } else if (state.selected.length < 3) {
     state.selected.push(category);
   } else {
-    $("categoryHint").textContent = "เลือกได้สูงสุด 3 หมวดหมู่";
+    $("categoryHint").textContent = translateString("เลือกได้สูงสุด 3 หมวดหมู่");
     return;
   }
   renderCategories();
@@ -3247,7 +3313,7 @@ $("creatorForm").addEventListener("submit", (event) => {
   event.preventDefault();
   if (state.isAnalyzing) return;
   if (!state.selected.length) {
-    $("categoryHint").textContent = "กรุณาเลือกอย่างน้อย 1 หมวดหมู่";
+    $("categoryHint").textContent = translateString("กรุณาเลือกอย่างน้อย 1 หมวดหมู่");
     return;
   }
   startAnalysisRun();
@@ -4091,9 +4157,9 @@ function updatePublicProfilePreview(profile = getBuddyProfileData(), a = state.a
         <div>
           <p class="eyeline">Export Preview</p>
           <h3>Media kit สำหรับส่งให้แบรนด์</h3>
-          <p>${profile.tagline || `${a.icon} ${a.creator_dna} · ${a.thai_title}`}</p>
+          <p>${profile.tagline || `${a.icon} ${a.creator_dna} · ${translateString(a.thai_title)}`}</p>
         </div>
-        <div class="export-contact-chip">${profile.contact.email || "เพิ่มช่องทางติดต่อ"}</div>
+        <div class="export-contact-chip">${profile.contact.email || translateString("เพิ่มช่องทางติดต่อ")}</div>
       </section>
       <section class="export-kpi-strip">
         <span><b>${audience.totalFollowers || "Add"}</b><em>Total Followers</em></span>
@@ -4307,7 +4373,7 @@ function contactLabel(key) {
 }
 
 function renderMediaKitHeader(profile, analysis) {
-  const name = profile.displayName || profile.creatorName || "เพิ่มชื่อโปรไฟล์";
+  const name = profile.displayName || profile.creatorName || translateString("เพิ่มชื่อโปรไฟล์");
   const audience = getAudienceAnalytics();
   return `
     <div class="media-kit-header">
@@ -4315,8 +4381,8 @@ function renderMediaKitHeader(profile, analysis) {
       <div class="media-kit-copy">
         <div class="vibe-badge-line"><span class="status-pill">${analysis.icon} ${analysis.creator_dna}</span></div>
         <h2>${name}</h2>
-        <p class="media-kit-tagline">${profile.tagline || analysis.thai_title}</p>
-        <p class="media-kit-bio">${profile.bio || "เพิ่ม Bio เพื่อให้แบรนด์เข้าใจตัวตนและสไตล์คอนเทนต์ของคุณ"}</p>
+        <p class="media-kit-tagline">${profile.tagline || translateString(analysis.thai_title)}</p>
+        <p class="media-kit-bio">${profile.bio || translateString("เพิ่ม Bio เพื่อให้แบรนด์เข้าใจตัวตนและสไตล์คอนเทนต์ของคุณ")}</p>
         <div class="media-kit-kpis">
           <span><b>${audience.totalFollowers || "Add"}</b><em>Followers</em></span>
           <span><b>${audience.monthlyReach || "Add"}</b><em>Monthly Reach</em></span>
@@ -4324,11 +4390,11 @@ function renderMediaKitHeader(profile, analysis) {
           <span><b>${audience.engagementRate || "Add"}</b><em>Engagement</em></span>
         </div>
         <div class="media-kit-meta">
-          <span>${analysis.thai_title}</span>
+          <span>${translateString(analysis.thai_title)}</span>
           <span>${profile.platform}</span>
-          ${analysis.selected_categories.map((category) => `<span>${category}</span>`).join("")}
+          ${analysis.selected_categories.map((category) => `<span>${getCategoryLabel(category)}</span>`).join("")}
         </div>
-        <button class="primary-button compact" type="button" ${profile.contactEmail ? "" : "disabled"}>${profile.contactEmail || "เพิ่มช่องทางติดต่อ"}</button>
+        <button class="primary-button compact" type="button" ${profile.contactEmail ? "" : "disabled"}>${profile.contactEmail || translateString("เพิ่มช่องทางติดต่อ")}</button>
       </div>
     </div>`;
 }
@@ -4503,7 +4569,7 @@ async function exportBuddyProfilePng() {
   ctx.font = "800 58px Kanit, sans-serif";
   ctx.fillText(profile.displayName || profile.creatorName, 96, 200);
   ctx.font = "500 30px Kanit, sans-serif";
-  ctx.fillText(`${a.icon} ${a.creator_dna} · ${a.thai_title}`, 96, 248);
+  ctx.fillText(`${a.icon} ${a.creator_dna} · ${translateString(a.thai_title)}`, 96, 248);
   ctx.fillStyle = "#18181B";
   ctx.font = "700 34px Kanit, sans-serif";
   ctx.fillText("Creator Vibe", 72, 350);
@@ -4511,7 +4577,7 @@ async function exportBuddyProfilePng() {
   wrapCanvasText(ctx, profile.bio, 72, 395, 920, 38);
   const sections = [
     ["Platform", profile.platform],
-    ["Categories", a.selected_categories.join(" · ")],
+    ["Categories", a.selected_categories.map(getCategoryLabel).join(" · ")],
     ["Audience", a.audience_tab.main_audience_type],
     ["Brand Fit", a.audience_tab.brand_fit.join(" · ")],
     ["Content Style", a.overview_tab.content_formats.join(" · ")],
