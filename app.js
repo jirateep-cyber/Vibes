@@ -2741,14 +2741,7 @@ https://buddyreview.co/
 
 const buddyDefaultReply = `สวัสดีค่ะ ขอบคุณที่ติดต่อ Buddy Review ค่ะ
 
-รบกวนแจ้งรายละเอียดเพิ่มเติมได้เลยค่ะ เช่น
-
-* ชื่อบริษัท / แบรนด์
-* สินค้าหรือบริการ
-* เป้าหมายแคมเปญ
-* งบประมาณโดยประมาณ
-
-ทีมงานจะช่วยแนะนำแนวทางที่เหมาะสมให้ค่ะ`;
+รอสักครู่นะคะ ทีมงานกำลังจะมาตอบในแชทนี้ค่ะ`;
 
 function getBuddyAutoReply(message) {
   const normalized = message.toLowerCase();
@@ -2766,7 +2759,7 @@ const messengerQuickReplies = [
   { label: "Case Study", message: "ขอดู case study ผลงาน" },
   { label: "ใบเสนอราคา", message: "ขอใบเสนอราคา quotation" },
   { label: "สมัคร Creator", message: "สมัคร creator ร่วมงาน" },
-  { label: "คำถามอื่นๆ", message: "มีคำถามอื่นๆ อยากให้ทีมงานช่วยแนะนำ" },
+  { label: "คำถามอื่นๆ", message: "มีคำถามอื่นๆ" },
 ];
 
 function renderMessengerQuickReplies() {
