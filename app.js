@@ -1901,10 +1901,10 @@ function renderMemberGate(targetRoute = "mission") {
         <h2>Login เพื่อเข้า ${label}</h2>
         <p>หน้านี้ใช้ข้อมูลสมาชิกเพื่อ sync profile, campaign, reward, mission และ insight จากทุกหน้าให้คำนวณได้ถูกต้อง</p>
         <div class="member-gate-actions">
-          <button class="primary-button compact" data-gate-login type="button">Login</button>
+          <button class="primary-button compact" data-gate-vibes type="button">กลับไป Creator Vibes</button>
+          <button class="secondary-button compact" data-gate-login type="button">Login</button>
           <button class="secondary-button compact" data-gate-register type="button">Register</button>
         </div>
-        <button class="ghost-button compact" data-gate-vibes type="button">กลับไป Creator Vibes</button>
       </div>
     </section>`;
 }
