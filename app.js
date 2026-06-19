@@ -1954,6 +1954,7 @@ function completeAuth(provider = "Facebook", routeAfterAuth = "") {
 function getRouteFromLocation() {
   const path = getAppPathname();
   const hash = window.location.hash;
+  if (path === "/home" || hash === "#/home") return "home";
   if (path === "/mission" || hash === "#/mission" || path === "/creator-progress" || hash === "#/creator-progress") return "mission";
   if (path === "/portfolio" || hash === "#/portfolio" || path === "/buddy-profile" || hash === "#/buddy-profile") return "portfolio";
   if (path === "/campaign-hub" || hash === "#/campaign-hub" || path === "/jobs" || hash === "#/jobs") return "campaign-hub";
@@ -3546,7 +3547,7 @@ function setRoute(route, options = {}) {
     progressPage.classList.add("hidden");
     renderHomePage();
     renderNotificationState();
-    if (!options.skipHistory) safePushState({ route }, "/");
+    if (!options.skipHistory) safePushState({ route }, "/home");
     return;
   }
 
@@ -3604,7 +3605,7 @@ function safePushState(stateValue, url) {
     history.pushState(stateValue, "", withAppBasePath(url));
   } catch {
     const query = url.includes("?") ? url.slice(url.indexOf("?")) : "";
-    const fallback = stateValue.route === "home" ? "#/" : stateValue.route === "mission" ? "#/mission" : stateValue.route === "portfolio" ? "#/portfolio" : stateValue.route === "campaign-hub" ? "#/campaign-hub" : `#/creator-vibes${query}`;
+    const fallback = stateValue.route === "home" ? "#/home" : stateValue.route === "mission" ? "#/mission" : stateValue.route === "portfolio" ? "#/portfolio" : stateValue.route === "campaign-hub" ? "#/campaign-hub" : `#/creator-vibes${query}`;
     history.pushState(stateValue, "", fallback);
   }
 }
@@ -3635,6 +3636,8 @@ function syncRouteFromPath() {
   const path = getAppPathname();
   if (path === "/" || window.location.hash === "#/" || (!window.location.hash && path.endsWith("/index.html"))) {
     setRoute("creator-vibes", { skipHistory: true });
+  } else if (path === "/home" || window.location.hash === "#/home") {
+    setRoute("home", { skipHistory: true });
   } else if (path === "/mission" || window.location.hash === "#/mission" || path === "/creator-progress" || window.location.hash === "#/creator-progress") {
     setRoute("mission", { skipHistory: true });
   } else if (path === "/portfolio" || window.location.hash === "#/portfolio" || path === "/buddy-profile" || window.location.hash === "#/buddy-profile") {
