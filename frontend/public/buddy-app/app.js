@@ -1951,7 +1951,7 @@ function getRouteFromLocation() {
   if (path === "/mission" || hash === "#/mission" || path === "/creator-progress" || hash === "#/creator-progress") return "mission";
   if (path === "/portfolio" || hash === "#/portfolio" || path === "/buddy-profile" || hash === "#/buddy-profile") return "portfolio";
   if (path === "/campaign-hub" || hash === "#/campaign-hub" || path === "/jobs" || hash === "#/jobs") return "campaign-hub";
-  if (path === "/" || hash === "#/" || (!hash && path.endsWith("/index.html"))) return state.isAuthenticated ? "home" : "creator-vibes";
+  if (path === "/" || hash === "#/" || (!hash && path.endsWith("/index.html"))) return "creator-vibes";
   return "";
 }
 
@@ -3619,7 +3619,7 @@ function getAppPathname() {
 function syncRouteFromPath() {
   const path = getAppPathname();
   if (path === "/" || window.location.hash === "#/" || (!window.location.hash && path.endsWith("/index.html"))) {
-    setRoute("home", { skipHistory: true });
+    setRoute("creator-vibes", { skipHistory: true });
   } else if (path === "/mission" || window.location.hash === "#/mission" || path === "/creator-progress" || window.location.hash === "#/creator-progress") {
     setRoute("mission", { skipHistory: true });
   } else if (path === "/portfolio" || window.location.hash === "#/portfolio" || path === "/buddy-profile" || window.location.hash === "#/buddy-profile") {
