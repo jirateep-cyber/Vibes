@@ -656,7 +656,7 @@ const i18nText = {
     "Login เพื่อเข้า Portfolio": "Log in to access Portfolio",
     "Login เพื่อเข้า Campaign Hub": "Log in to access Campaign Hub",
     "หน้านี้ใช้ข้อมูลสมาชิกเพื่อ sync profile, campaign, reward, mission และ insight จากทุกหน้าให้คำนวณได้ถูกต้อง": "This page uses member data to sync profile, campaigns, rewards, missions, and insights across the platform.",
-    "กลับไป Creator Vibes": "Back to Creator Vibes",
+    "ลอง Creator Vibes ฟรี": "Try Creator Vibes for free",
     "ออกจากระบบ": "Log out",
     "งานใหม่": "New jobs",
     "อ่านแล้ว": "Read",
@@ -1711,7 +1711,13 @@ function completeMission(id) {
   mission.progress = mission.target ?? 1;
   userProgression.creatorXP += mission.rewardXP || 0;
   userProgression.rewardPoints += mission.rewardXP || 0;
+  showMissionCompleteToast(mission);
   return true;
+}
+
+function showMissionCompleteToast(mission) {
+  const reward = mission.rewardXP || 0;
+  showAutosave(`Mission สำเร็จ: ${mission.title} +${reward} XP · +${reward} Reward Points`);
 }
 
 function getCreatorProfileSummary() {
@@ -1901,7 +1907,7 @@ function renderMemberGate(targetRoute = "mission") {
         <h2>Login เพื่อเข้า ${label}</h2>
         <p>หน้านี้ใช้ข้อมูลสมาชิกเพื่อ sync profile, campaign, reward, mission และ insight จากทุกหน้าให้คำนวณได้ถูกต้อง</p>
         <div class="member-gate-actions">
-          <button class="primary-button compact" data-gate-vibes type="button">กลับไป Creator Vibes</button>
+          <button class="primary-button compact" data-gate-vibes type="button">ลอง Creator Vibes ฟรี</button>
           <button class="secondary-button compact" data-gate-login type="button">Login</button>
           <button class="secondary-button compact" data-gate-register type="button">Register</button>
         </div>
