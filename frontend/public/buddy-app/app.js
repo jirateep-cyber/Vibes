@@ -1946,7 +1946,7 @@ function completeAuth(provider = "Facebook", routeAfterAuth = "") {
 }
 
 function getRouteFromLocation() {
-  const path = window.location.pathname;
+  const path = getAppPathname();
   const hash = window.location.hash;
   if (path === "/mission" || hash === "#/mission" || path === "/creator-progress" || hash === "#/creator-progress") return "mission";
   if (path === "/portfolio" || hash === "#/portfolio" || path === "/buddy-profile" || hash === "#/buddy-profile") return "portfolio";
@@ -3592,7 +3592,7 @@ function setRoute(route, options = {}) {
 
 function safePushState(stateValue, url) {
   try {
-    history.pushState(stateValue, "", url);
+    history.pushState(stateValue, "", withAppBasePath(url));
   } catch {
     const query = url.includes("?") ? url.slice(url.indexOf("?")) : "";
     const fallback = stateValue.route === "home" ? "#/" : stateValue.route === "mission" ? "#/mission" : stateValue.route === "portfolio" ? "#/portfolio" : stateValue.route === "campaign-hub" ? "#/campaign-hub" : `#/creator-vibes${query}`;
@@ -3600,14 +3600,37 @@ function safePushState(stateValue, url) {
   }
 }
 
+function getAppBasePath() {
+  if (window.location.protocol === "file:") return "";
+  const segments = window.location.pathname.split("/").filter(Boolean);
+  if (window.location.hostname.endsWith("github.io") && segments[0]) return `/${segments[0]}`;
+  return "";
+}
+
+function withAppBasePath(url) {
+  const base = getAppBasePath();
+  if (!base || url.startsWith("#") || url.startsWith(base)) return url;
+  if (url === "/") return `${base}/`;
+  return `${base}${url}`;
+}
+
+function getAppPathname() {
+  const base = getAppBasePath();
+  let path = window.location.pathname;
+  if (base && (path === base || path.startsWith(`${base}/`))) path = path.slice(base.length) || "/";
+  if (path.endsWith("/index.html")) return "/";
+  return path || "/";
+}
+
 function syncRouteFromPath() {
-  if (window.location.pathname === "/" || window.location.hash === "#/" || (!window.location.hash && window.location.pathname.endsWith("/index.html"))) {
+  const path = getAppPathname();
+  if (path === "/" || window.location.hash === "#/" || (!window.location.hash && path.endsWith("/index.html"))) {
     setRoute(state.isAuthenticated ? "home" : "creator-vibes", { skipHistory: true });
-  } else if (window.location.pathname === "/mission" || window.location.hash === "#/mission" || window.location.pathname === "/creator-progress" || window.location.hash === "#/creator-progress") {
+  } else if (path === "/mission" || window.location.hash === "#/mission" || path === "/creator-progress" || window.location.hash === "#/creator-progress") {
     setRoute("mission", { skipHistory: true });
-  } else if (window.location.pathname === "/portfolio" || window.location.hash === "#/portfolio" || window.location.pathname === "/buddy-profile" || window.location.hash === "#/buddy-profile") {
+  } else if (path === "/portfolio" || window.location.hash === "#/portfolio" || path === "/buddy-profile" || window.location.hash === "#/buddy-profile") {
     setRoute("portfolio", { skipHistory: true });
-  } else if (window.location.pathname === "/campaign-hub" || window.location.hash === "#/campaign-hub" || window.location.pathname === "/jobs" || window.location.hash === "#/jobs") {
+  } else if (path === "/campaign-hub" || window.location.hash === "#/campaign-hub" || path === "/jobs" || window.location.hash === "#/jobs") {
     setRoute("campaign-hub", { skipHistory: true });
   } else {
     const query = window.location.search || (window.location.hash.includes("?") ? window.location.hash.slice(window.location.hash.indexOf("?")) : "");
