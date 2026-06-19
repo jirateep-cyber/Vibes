@@ -3592,7 +3592,7 @@ function setRoute(route, options = {}) {
 
 function safePushState(stateValue, url) {
   try {
-    history.pushState(stateValue, "", toHashRoute(stateValue.route, url));
+    history.pushState(stateValue, "", withAppBasePath(url));
   } catch {
     const query = url.includes("?") ? url.slice(url.indexOf("?")) : "";
     const fallback = stateValue.route === "home" ? "#/" : stateValue.route === "mission" ? "#/mission" : stateValue.route === "portfolio" ? "#/portfolio" : stateValue.route === "campaign-hub" ? "#/campaign-hub" : `#/creator-vibes${query}`;
@@ -3600,21 +3600,24 @@ function safePushState(stateValue, url) {
   }
 }
 
-function toHashRoute(route, url = "") {
-  const query = url.includes("?") ? url.slice(url.indexOf("?")) : "";
-  if (route === "home") return "#/";
-  if (route === "mission") return "#/mission";
-  if (route === "portfolio") return "#/portfolio";
-  if (route === "campaign-hub") return "#/campaign-hub";
-  return `#/creator-vibes${query}`;
+function getAppBasePath() {
+  if (window.location.protocol === "file:") return "";
+  const segments = window.location.pathname.split("/").filter(Boolean);
+  if (window.location.hostname.endsWith("github.io") && segments[0]) return `/${segments[0]}`;
+  return "";
+}
+
+function withAppBasePath(url) {
+  const base = getAppBasePath();
+  if (!base || url.startsWith("#") || url.startsWith(base)) return url;
+  if (url === "/") return `${base}/`;
+  return `${base}${url}`;
 }
 
 function getAppPathname() {
   let path = window.location.pathname;
-  const segments = path.split("/").filter(Boolean);
-  if (window.location.hostname.endsWith("github.io") && segments[0]) {
-    path = `/${segments.slice(1).join("/")}`;
-  }
+  const base = getAppBasePath();
+  if (base && (path === base || path.startsWith(`${base}/`))) path = path.slice(base.length) || "/";
   if (path.endsWith("/index.html")) return "/";
   return path || "/";
 }
