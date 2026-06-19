@@ -2758,7 +2758,7 @@ const messengerQuickReplies = [
   { label: "หา Creator", message: "อยากหา influencer creator kol" },
   { label: "Case Study", message: "ขอดู case study ผลงาน" },
   { label: "ใบเสนอราคา", message: "ขอใบเสนอราคา quotation" },
-  { label: "สมัคร Creator", message: "สมัคร creator ร่วมงาน" },
+  { label: "สมัคร Creator", message: "สมัคร creator" },
   { label: "คำถามอื่นๆ", message: "มีคำถามอื่นๆ" },
 ];
 
